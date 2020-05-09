@@ -76,6 +76,15 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <nav class="fixed-bottom navbar navbar-expand-md navbar-light bg-white border-top">
+            <div class="container">
+                <a href="https://letsencrypt.org/ja/how-it-works/">
+                    <img src="{{ asset("images/lets-encrypt-logo.png") }}" alt="lets Encrypt" height="40px">
+                     このサイトはSSL通信により保護されています。
+                </a>
+            </div>
+        </nav>
     </div>
 </body>
 </html>
