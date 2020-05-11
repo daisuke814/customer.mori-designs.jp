@@ -77,6 +77,11 @@
         <main class="py-4">
 
             <div class="container">
+
+                <div class="border border-danger bg-white py-2 px-3 mb-2">
+                    <a href="" class="text-danger">新型コロナウイルスに関する大切なお知らせ</a>
+                </div>
+
                 <div class="row justify-content-center">
                     <div class="col-md-3">
                         <div class="card">
