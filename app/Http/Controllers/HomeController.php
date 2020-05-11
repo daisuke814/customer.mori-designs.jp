@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -50,6 +51,33 @@ class HomeController extends Controller
 
         return redirect()->back()->with('change_password_success', 'パスワードを変更しました。');
     }
+
+    /**
+     *
+     * スレッド
+     *
+     */
+    public function viewThread()
+    {
+
+        // $data = DB::table("thread")->where("id",Auth::id())->get();
+
+        return view("thread");
+    }
+
+    /**
+     *
+     * お支払い
+     *
+     */
+    public function payment()
+    {
+
+        // $data = DB::table("thread")->where("id",Auth::id())->get();
+
+        return view("payment");
+    }
+
 
     /**
      * Show the application dashboard.

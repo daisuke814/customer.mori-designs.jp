@@ -17,7 +17,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0d37fd5bfe.js" crossorigin="anonymous"></script>
+{{--    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">--}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -76,7 +77,24 @@
         <main class="py-4">
 
             <div class="container">
-                @yield('content')
+                <div class="row justify-content-center">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">メニュー</div>
+
+                            <div class="list-group list-group-flush">
+                                <a href="{{ route("thread") }}" class="list-group-item list-group-item-action"><i class="fa fa-inbox" aria-hidden="true"></i> スレッド</a>
+                                <a href="#" class="list-group-item list-group-item-action"><i class="fa fa-folder-open" aria-hidden="true"></i> ファイル</a>
+                                <a href="{{ route("payment") }}" class="list-group-item list-group-item-action"><i class="fa fa-shopping-cart" aria-hidden="true"></i> お支払い</a>
+                                <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-cogs"></i> 設定</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @yield('content')
+                    </div>
+                </div>
             </div>
 
 

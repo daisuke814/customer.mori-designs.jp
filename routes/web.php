@@ -15,6 +15,12 @@
 Route::get('/', 'HomeController@index');
 Route::get('/mypage', 'HomeController@index')->name('home');
 
+// スレッド
+Route::get('/thread', 'HomeController@viewThread')->name('thread');
+
+// お支払い
+Route::get('/payment', 'HomeController@payment')->name('payment');
+
 // パスワード変更
 Route::get('changepassword', 'HomeController@showChangePasswordForm')->name("changepass");
 Route::post('changepassword', 'HomeController@changePassword')->name('changepassword');
