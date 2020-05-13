@@ -18,8 +18,8 @@ class CreateThreadTable extends Migration
             $table->integer("user_id");
             $table->string("message",2000);
             $table->integer("sender");
-            $table->text("filename");
-
+            $table->text("original_filename")->nullable();
+            $table->text("server_filename")->nullable();
             $table->timestamps();
         });
     }

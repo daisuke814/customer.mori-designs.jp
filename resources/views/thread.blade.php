@@ -6,20 +6,38 @@
 
         <div class="card-body">
 
-            <div class="alert alert-info">
-                こんにちは
-            </div>
+            @foreach($data as $item)
+                @if($item->sender == 1)
+                    <div class="alert alert-info">
+                        {!! nl2br(e($item->message)) !!}
+                        @if($item->original_filename)
+                            <hr>
+                            <i class="fas fa-save"></i> 添付ファイル <a href="" download="{{ $item->original_filename }}">{{ $item->original_filename }}</a>
+                        @endif
+                    </div>
+                @else
+                    <div class="alert border">
+                        {!! nl2br(e($item->message)) !!}
+                        @if($item->original_filename)
+                            <hr>
+                            <i class="fas fa-save"></i> 添付ファイル <a href="{{ route("threadDownload",$item->server_filename) }}" download="{{ $item->original_filename }}">{{ $item->original_filename }}</a>
+                        @endif
+                    </div>
+                @endif
+            @endforeach
 
-            <div class="alert border">
-                バナーのリメイクを依頼したくご連絡しました。<br>
-                つきまして、ファイルをダウンロードしていただければと思います。
-                <hr>
-                <i class="fas fa-save"></i> <a href="">イラストレーター.pdf</a>
-            </div>
-
-            <form action="" method="post" enctype="multipart/form-data" class="border-top pt-2 mt-2">
+            <form action="{{ route("thread") }}" method="post" enctype="multipart/form-data" class="border-top pt-2 mt-2">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="m-0 p-0" style="list-style: none;">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 @csrf
-                <textarea name="" id="" cols="10" rows="5" class="form-control m-1" required></textarea>
+                <textarea name="message" id="" cols="10" rows="5" class="form-control m-1" required></textarea>
                 <input type="file" name="file" id="" class="form-control m-1">
                 <button type="submit" class="btn btn-primary w-100 m-1">送信</button>
             </form>

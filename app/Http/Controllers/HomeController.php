@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
+
+
     /**
      * Create a new controller instance.
      *
@@ -60,9 +63,64 @@ class HomeController extends Controller
     public function viewThread()
     {
 
-        // $data = DB::table("thread")->where("id",Auth::id())->get();
+        // データベースからメッセージを取得
+        $data = DB::table("thread")
+                ->where("user_id",Auth::id())
+                ->orderByDesc("created_at")
+                ->limit(25)
+                ->get();
 
-        return view("thread");
+        return view("thread",compact("data"));
+    }
+
+    public function postThread(Request $request) {
+
+        // 二重送信防止
+        $request->session()->regenerateToken();
+
+        // バリデーション
+        $request->validate([
+            'message' => 'required|max:2',
+            'file' => 'nullable|file|max:1024'
+        ]);
+
+        // ファイルが送信された場合の処理
+        if (!is_null($request->file("file"))) {
+            $file = $request->file("file");
+            $serverFilename = time()."-".$file->getClientOriginalName();
+            $file->storeAs(Auth::id(),$serverFilename);
+            $originalFilename = $file->getClientOriginalName();
+        }else {
+            $serverFilename = NULL;
+            $originalFilename = NULL;
+        }
+
+        DB::table("thread")
+            ->insert(
+                [
+                    "user_id" => Auth::id(),
+                    "sender" => Auth::id(),
+                    "message" => $request->message,
+                    "original_filename" => $originalFilename,
+                    "server_filename" => $serverFilename,
+                    "created_at" => NOW(),
+                ]
+            );
+
+        return redirect(route("thread"));
+    }
+
+    public function downloadThread($serverFilename)
+    {
+
+        // ファイルがなければHTTPステータスコード404をレスポンス
+        if (empty($serverFilename)) {
+            abort(404);
+            exit;
+        }
+
+        return Storage::get(Auth::id()."/".$serverFilename);
+
     }
 
     /**

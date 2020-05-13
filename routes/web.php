@@ -17,6 +17,8 @@ Route::get('/mypage', 'HomeController@index')->name('home');
 
 // スレッド
 Route::get('/thread', 'HomeController@viewThread')->name('thread');
+Route::post('/thread', 'HomeController@postThread');
+Route::get('/thread/file/{serverFilename}', 'HomeController@downloadThread')->name('threadDownload');
 
 // お支払い
 Route::get('/payment', 'HomeController@payment')->name('payment');
