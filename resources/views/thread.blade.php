@@ -15,7 +15,9 @@
                             <i class="fas fa-save"></i> 添付ファイル <a href="" download="{{ $item->original_filename }}">{{ $item->original_filename }}</a>
                         @endif
                     </div>
+                    {{ $item->created_at }}
                 @else
+                    <span class="text-right">{{ $item->created_at }}</span>
                     <div class="alert border">
                         {!! nl2br(e($item->message)) !!}
                         @if($item->original_filename)

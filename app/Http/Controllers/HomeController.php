@@ -125,6 +125,19 @@ class HomeController extends Controller
 
     /**
      *
+     * ファイル
+     *
+     */
+
+    public function viewFile()
+    {
+        $fileList = DB::table("thread")->where("user_id",Auth::id());
+
+        return view("file");
+    }
+
+    /**
+     *
      * お支払い
      *
      */

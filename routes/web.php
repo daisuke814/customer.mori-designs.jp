@@ -20,6 +20,9 @@ Route::get('/thread', 'HomeController@viewThread')->name('thread');
 Route::post('/thread', 'HomeController@postThread');
 Route::get('/thread/file/{serverFilename}', 'HomeController@downloadThread')->name('threadDownload');
 
+// ファイル
+Route::get('/file', 'HomeController@viewFile')->name('file');
+
 // お支払い
 Route::get('/payment', 'HomeController@payment')->name('payment');
 
