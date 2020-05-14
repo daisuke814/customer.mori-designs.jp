@@ -26,6 +26,9 @@ Route::get('/file', 'HomeController@viewFile')->name('file');
 // お支払い
 Route::get('/payment', 'HomeController@payment')->name('payment');
 
+// 設定
+Route::get('/setting', 'HomeController@viewSetting')->name('setting');
+
 // パスワード変更
 Route::get('changepassword', 'HomeController@showChangePasswordForm')->name("changepass");
 Route::post('changepassword', 'HomeController@changePassword')->name('changepassword');

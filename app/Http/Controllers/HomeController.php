@@ -69,10 +69,12 @@ class HomeController extends Controller
                 ->orderByDesc("created_at")
                 ->limit(25)
                 ->get();
+        $data = $data->reverse();
 
         return view("thread",compact("data"));
     }
 
+    // スレッド送信処理
     public function postThread(Request $request) {
 
         // 二重送信防止
@@ -110,6 +112,7 @@ class HomeController extends Controller
         return redirect(route("thread"));
     }
 
+    // スレッドにアップロードされたファイルをダウンロードさせる
     public function downloadThread($serverFilename)
     {
 
@@ -131,9 +134,12 @@ class HomeController extends Controller
 
     public function viewFile()
     {
-        $fileList = DB::table("thread")->where("user_id",Auth::id());
 
-        return view("file");
+        // データベースからファイル名が保存されているレコードを取得
+        $fileList = DB::table("thread")->where("user_id",Auth::id())
+        ->where("server_filename","!=",NULL)->get();
+
+        return view("file",compact("fileList"));
     }
 
     /**
@@ -149,6 +155,19 @@ class HomeController extends Controller
         return view("payment");
     }
 
+
+    /**
+     *
+     * 設定
+     *
+     */
+    public function viewSetting()
+    {
+
+        // $data = DB::table("thread")->where("id",Auth::id())->get();
+
+        return view("setting");
+    }
 
     /**
      * Show the application dashboard.

@@ -94,7 +94,7 @@
                                 <a href="{{ route("thread") }}" class="list-group-item list-group-item-action"><i class="fa fa-inbox" aria-hidden="true"></i> スレッド</a>
                                 <a href="{{ route("file") }}" class="list-group-item list-group-item-action"><i class="fa fa-folder-open" aria-hidden="true"></i> ファイル</a>
                                 <a href="{{ route("payment") }}" class="list-group-item list-group-item-action"><i class="fa fa-shopping-cart" aria-hidden="true"></i> お支払い</a>
-                                <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-cogs"></i> 設定</a>
+                                <a href="{{ route("setting") }}" class="list-group-item list-group-item-action"><i class="fas fa-cogs"></i> 設定</a>
                             </div>
 
                         </div>
